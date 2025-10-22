@@ -22,7 +22,7 @@ class SlidingWindowCounterRateLimiter:
                 for _ in range(min(shift, self.buckets)):
                     self.user_buckets[key].pop(0)
                     self.user_buckets[key].append(0)
-                self.last_access[key] = nows
+                self.last_access[key] = now
 
             total = sum(self.user_buckets[key])
             allowed = total < self.max_requests

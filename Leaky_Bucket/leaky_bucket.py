@@ -6,7 +6,7 @@ class LeakyBucketRateLimiter:
     def __init__(self, capacity, window_seconds, locks):
         self.capacity = capacity
         self.rate = capacity / window_seconds
-        self.bucket = defaultdict(lambda: {"tsokens": 0, "last_check": time.time()})
+        self.bucket = defaultdict(lambda: {"tokens": 0, "last_check": time.time()})
         self.locks = locks
 
     async def allow_request(self, key):

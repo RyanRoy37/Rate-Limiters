@@ -23,10 +23,10 @@ def get_lock(key: str) -> asyncio.Lock:
 
 # Instantiate limiters
 DEFAULT_LIMITERS = {
-    "fixed_window": FixedWindowRateLimiter(max_requests=10, window_seconds=60, locks=locks),
-    "sliding_counter": SlidingWindowCounterRateLimiter(max_requests=10, window_seconds=60, buckets=6, locks=locks),
-    "token_bucket": TokenBucketRateLimiter(capacity=10, window_seconds=60, locks=locks),
-    "leaky_bucket": LeakyBucketRateLimiter(capacity=10, window_seconds=60, locks=locks),
+    "fixed_window": FixedWindowRateLimiter(max_requests=1000, window_seconds=60, locks=locks),
+    "sliding_counter": SlidingWindowCounterRateLimiter(max_requests=1000, window_seconds=60, buckets=6, locks=locks),
+    "token_bucket": TokenBucketRateLimiter(capacity=1000, window_seconds=60, locks=locks),
+    "leaky_bucket": LeakyBucketRateLimiter(capacity=1000, window_seconds=60, locks=locks),
 }
 
 @app.get("/")
