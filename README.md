@@ -127,3 +127,11 @@ Call allow_request(key) to check if the request is allowed.
 Return JSON and rate-limit headers.
 
 This setup is ideal for benchmarking and comparing different rate-limiting strategies in an async web environment.
+
+
+# Conclusion
+
+Rate limiting is critical for API protection against resource exhaustion and ensuring fair resource allocation. This study compares four rate limiting algorithms—Fixed Window, Leaky Bucket, Sliding Window, and Token Bucket—implemented in FastAPI under realistic load conditions.
+Using Apache JMeter, we conducted load tests with 50 concurrent threads, 10-second ramp-up, and 100 iterations against a /request endpoint with algorithm-specific path parameters. Metrics including throughput, success/failure rates, and server hits per second were collected at one-second granularity over 111 seconds.
+Results reveal distinct characteristics: Token Bucket demonstrated superior stability with consistent 15-20 transactions/sec throughput and minimal variance, optimal for predictable user experience. Fixed Window showed progressive degradation with increasing failure rates over time due to boundary effects. Sliding Window proved most restrictive with 5:1 failure-to-success ratio at peak load, suitable for high-security scenarios. Leaky Bucket exhibited moderate performance but unpredictable spike patterns.
+Recommendations: Token Bucket for consumer-facing services requiring predictable performance, Sliding Window for high-security APIs prioritizing strict enforcement, and avoiding Fixed Window in sustained high-load scenarios. These findings enable data-driven rate limiting strategy selection for production API deployments in microservices architectures and API gateways.
