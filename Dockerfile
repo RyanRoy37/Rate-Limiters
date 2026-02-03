@@ -35,9 +35,6 @@ ENV HOST=0.0.0.0
 ENV PORT=8000
 ENV UVICORN_WORKERS=1
 
-# Healthcheck (optional): checks the root endpoint
-#HEALTHCHECK --interval=30s --timeout=3s --start-period=10s \
- # CMD curl -f http://localhost:${PORT}/ || exit 1
 
 # Default command to start the FastAPI app with uvicorn
 CMD ["sh", "-c", "uvicorn main:app --host ${HOST} --port ${PORT} --workers ${UVICORN_WORKERS}"]

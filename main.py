@@ -4,7 +4,6 @@ from fastapi.responses import JSONResponse
 import asyncio
 from typing import Optional, Dict
 app = FastAPI(title="Timestamp-based Rate Limiters")
-# Import algorithms
 from Fixed_Window.fixed_window import FixedWindowRateLimiter
 from Sliding_Window.sliding_window import SlidingWindowCounterRateLimiter
 from Token_Bucket.token_bucket import TokenBucketRateLimiter
@@ -23,10 +22,10 @@ def get_lock(key: str) -> asyncio.Lock:
 
 # Instantiate limiters
 DEFAULT_LIMITERS = {
-    "fixed_window": FixedWindowRateLimiter(max_requests=1000, window_seconds=60, locks=locks),
-    "sliding_counter": SlidingWindowCounterRateLimiter(max_requests=1000, window_seconds=60, buckets=6, locks=locks),
-    "token_bucket": TokenBucketRateLimiter(capacity=1000, window_seconds=60, locks=locks),
-    "leaky_bucket": LeakyBucketRateLimiter(capacity=1000, window_seconds=60, locks=locks),
+    "fixed_window": FixedWindowRateLimiter(max_requests=100, window_seconds=60, locks=locks),
+    "sliding_counter": SlidingWindowCounterRateLimiter(max_requests=100, window_seconds=60, buckets=6, locks=locks),
+    "token_bucket": TokenBucketRateLimiter(capacity=100, window_seconds=60, locks=locks),
+    "leaky_bucket": LeakyBucketRateLimiter(capacity=100, window_seconds=60, locks=locks),
 }
 
 @app.get("/")
